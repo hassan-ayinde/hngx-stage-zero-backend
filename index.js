@@ -1,10 +1,9 @@
-const express = require("express");
-const app = express();
 require("dotenv").config();
+const express = require("express");
 const cors = require("cors");
 const axios = require("axios");
+const app = express();
 
-const port = process.env.PORT || 3000;
 app.use(cors());
 app.set("json spaces", 2);
 
@@ -22,10 +21,10 @@ app.get("/me", async (req, res) => {
       throw new Error("something went wrong");
     }
     const randomCatFact = catApiResponse.data.fact;
-
+    
     const profile = {
-      status: "success",
-      user: {
+        status: "success",
+        user: {
         email: "hassan.toheeb.ayinde@gmail.com",
         name: "hassan toheeb",
         stack: "Node.js/Express",
@@ -39,11 +38,11 @@ app.get("/me", async (req, res) => {
     let statusCode, message;
 
     if (error.code === "ECONNABORTED") {
-      statusCode = 504;
-      message = "Cat Facts API request timed out. Please try again later.";
+        statusCode = 504;
+        message = "Cat Facts API request timed out. Please try again later.";
     } else if (error.response) {
-      statusCode = error.response.status || 502;
-      message = `Cat Facts API returned an error: ${error.response.statusText}`;
+        statusCode = error.response.status || 502;
+        message = `Cat Facts API returned an error: ${error.response.statusText}`;
     } else if (error.code === "ENOTFOUND") {
       statusCode = 502;
       message = "Unable to reach Cat Facts API. Please try again later.";
@@ -56,9 +55,10 @@ app.get("/me", async (req, res) => {
       status: "error",
       message,
     });
-  }
+}
 });
 
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`server is running on port ${port}`);
 });
