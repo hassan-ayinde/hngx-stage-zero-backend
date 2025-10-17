@@ -29,8 +29,8 @@ app.get("/me", async (req, res) => {
         name: "hassan toheeb",
         stack: "Node.js/Express",
       },
-      timeStamp: new Date().toISOString(),
-      randomCatFact: randomCatFact,
+      timestamp: new Date().toISOString(),
+      fact: randomCatFact,
     };
     res.status(200).json(profile);
   } catch (error) {
